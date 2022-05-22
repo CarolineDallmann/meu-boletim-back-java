@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.meuboletim.DTO.BoletimDTO;
+import com.meuboletim.DTO.FrequenciaDTO;
+import com.meuboletim.DTO.NotaDTO;
 import com.meuboletim.entities.Frequencia;
 import com.meuboletim.entities.Nota;
 import com.meuboletim.repositories.FrequenciaRepository;
@@ -21,10 +23,6 @@ public class BoletimService {
 
 	@Autowired
 	FrequenciaRepository frequenciaRepository;
-
-//	public List<Pessoa> list(TipoPessoa tipo, String nome, boolean mostrarInativos) {
-//		return pessoaRepository.list(tipo, nome, mostrarInativos);
-//	}
 
 	public List<BoletimDTO> getBoletim(UUID alunoId, short anoLetivo) {
 		List<Nota> notas = notaRepository.findByAlunoIdAndAnoLetivo(alunoId, anoLetivo);
@@ -43,9 +41,45 @@ public class BoletimService {
 			b.setQtdeFaltaBim2(f.getQtdeFaltaBim2());
 			b.setQtdeFaltaBim3(f.getQtdeFaltaBim3());
 			b.setQtdeFaltaBim4(f.getQtdeFaltaBim4());
+			b.setQtdePresenca(f.getQtdePresenca());
 
 			boletim.add(b);
 		}
 		return boletim;
+	}
+
+	public String salvarNota(NotaDTO nota) {
+		Nota notaEncontrada = notaRepository
+				.findFirstByAlunoIdAndMateriaIdAndAnoLetivo(nota.getAlunoId(), nota.getMateriaId(), nota.getAnoLetivo())
+				.orElse(new Nota());
+		notaEncontrada.setAlunoId(nota.getAlunoId());
+		notaEncontrada.setAnoLetivo(nota.getAnoLetivo());
+		notaEncontrada.setMateriaId(nota.getMateriaId());
+		notaEncontrada.setNotaBim1(nota.getNotaBim1());
+		notaEncontrada.setNotaBim2(nota.getNotaBim2());
+		notaEncontrada.setNotaBim3(nota.getNotaBim3());
+		notaEncontrada.setNotaBim4(nota.getNotaBim4());
+
+		notaRepository.save(notaEncontrada);
+
+		return "Ok";
+	}
+
+	public String salvarFrequencia(FrequenciaDTO frequencia) {
+		Frequencia freqEncontrada = frequenciaRepository.findFirstByAlunoIdAndMateriaIdAndAnoLetivo(
+				frequencia.getAlunoId(), frequencia.getMateriaId(), frequencia.getAnoLetivo()).orElse(new Frequencia());
+
+		freqEncontrada.setAlunoId(frequencia.getAlunoId());
+		freqEncontrada.setAnoLetivo(frequencia.getAnoLetivo());
+		freqEncontrada.setMateriaId(frequencia.getMateriaId());
+		freqEncontrada.setQtdeFaltaBim1(frequencia.getQtdeFaltaBim1());
+		freqEncontrada.setQtdeFaltaBim2(frequencia.getQtdeFaltaBim2());
+		freqEncontrada.setQtdeFaltaBim3(frequencia.getQtdeFaltaBim3());
+		freqEncontrada.setQtdeFaltaBim4(frequencia.getQtdeFaltaBim4());
+		freqEncontrada.setQtdePresenca(frequencia.getQtdePresenca());
+
+		frequenciaRepository.save(freqEncontrada);
+
+		return "Ok";
 	}
 }

@@ -5,11 +5,15 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.meuboletim.DTO.BoletimDTO;
+import com.meuboletim.DTO.FrequenciaDTO;
+import com.meuboletim.DTO.NotaDTO;
 import com.meuboletim.services.BoletimService;
 
 @RestController
@@ -24,9 +28,14 @@ public class BoletimController {
 		return boletimService.getBoletim(alunoId, anoLetivo);
 	}
 
-//	@PostMapping
-//	public Pessoa save(@RequestBody Pessoa pessoa) {
-//		return pessoaRepository.save(pessoa);
-//	}
+	@PostMapping("/nota")
+	public String save(@RequestBody NotaDTO nota) {
+		return boletimService.salvarNota(nota);
+	}
+
+	@PostMapping("/frequencia")
+	public String save(@RequestBody FrequenciaDTO frequencia) {
+		return boletimService.salvarFrequencia(frequencia);
+	}
 
 }
