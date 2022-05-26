@@ -17,7 +17,7 @@ import com.meuboletim.DTO.NotaDTO;
 import com.meuboletim.services.BoletimService;
 
 @RestController
-@RequestMapping("boletim")
+@RequestMapping("/boletim")
 public class BoletimController {
 
 	@Autowired
