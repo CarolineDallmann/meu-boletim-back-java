@@ -36,6 +36,6 @@ public class FrequenciaDTO {
 	private short qtdePresenca;
 
 	@NotNull(message = "Ano obrigatório")
-	private short anoLetivo;
+	private Short anoLetivo;
 
 }

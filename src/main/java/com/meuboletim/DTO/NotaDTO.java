@@ -38,5 +38,5 @@ public class NotaDTO {
 	private float notaBim4;
 
 	@NotNull(message = "Ano obrigatório")
-	private short anoLetivo;
+	private Short anoLetivo;
 }

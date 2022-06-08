@@ -51,7 +51,8 @@ public class BoletimService {
 	public String salvarNota(NotaDTO nota) {
 		Nota notaEncontrada = notaRepository
 				.findFirstByAlunoIdAndMateriaIdAndAnoLetivo(nota.getAlunoId(), nota.getMateriaId(), nota.getAnoLetivo())
-				.orElse(new Nota());
+				.orElse(new Nota(UUID.randomUUID().toString()));
+
 		notaEncontrada.setAlunoId(nota.getAlunoId());
 		notaEncontrada.setAnoLetivo(nota.getAnoLetivo());
 		notaEncontrada.setMateriaId(nota.getMateriaId());
@@ -66,8 +67,10 @@ public class BoletimService {
 	}
 
 	public String salvarFrequencia(FrequenciaDTO frequencia) {
-		Frequencia freqEncontrada = frequenciaRepository.findFirstByAlunoIdAndMateriaIdAndAnoLetivo(
-				frequencia.getAlunoId(), frequencia.getMateriaId(), frequencia.getAnoLetivo()).orElse(new Frequencia());
+		Frequencia freqEncontrada = frequenciaRepository
+				.findFirstByAlunoIdAndMateriaIdAndAnoLetivo(frequencia.getAlunoId(), frequencia.getMateriaId(),
+						frequencia.getAnoLetivo())
+				.orElse(new Frequencia(UUID.randomUUID().toString()));
 
 		freqEncontrada.setAlunoId(frequencia.getAlunoId());
 		freqEncontrada.setAnoLetivo(frequencia.getAnoLetivo());

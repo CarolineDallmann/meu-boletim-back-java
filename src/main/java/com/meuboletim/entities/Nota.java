@@ -4,11 +4,8 @@ import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
+import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -18,14 +15,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Table
 public class Nota {
 
 	@Id
-	@GenericGenerator(name = "uuid", strategy = "uuid2")
-	@GeneratedValue(generator = "uuid")
 	@Column(unique = true, nullable = false)
-	@Type(type = "pg-uuid")
-	private UUID id;
+	private String id;
 	private UUID materiaId;
 	private UUID alunoId;
 
@@ -34,5 +29,10 @@ public class Nota {
 	private float notaBim3;
 	private float notaBim4;
 	private short anoLetivo;
+
+	public Nota(String id) {
+		super();
+		this.id = id;
+	}
 
 }
