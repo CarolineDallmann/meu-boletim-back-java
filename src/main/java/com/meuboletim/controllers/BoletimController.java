@@ -21,6 +21,8 @@ import com.meuboletim.DTO.NotaDTO;
 import com.meuboletim.exceptions.ExceptionDefault;
 import com.meuboletim.services.BoletimService;
 
+import io.swagger.annotations.ApiOperation;
+
 @RestController
 @RequestMapping("/boletim")
 
@@ -29,8 +31,9 @@ public class BoletimController {
 	@Autowired
 	BoletimService boletimService;
 
-	@CrossOrigin(origins = "#{systemEnvironment['FRONT_URL']}")
 	@GetMapping
+	@CrossOrigin(origins = "#{systemEnvironment['FRONT_URL']}")
+	@ApiOperation(value = "Retorna boletim de um aluno por id e por ano letivo")
 	public List<BoletimDTO> getBoletim(@RequestParam(required = false, defaultValue = "") String alunoId,
 			@RequestParam(required = false, defaultValue = "1") short anoLetivo) throws Exception {
 
@@ -44,8 +47,9 @@ public class BoletimController {
 		return boletimService.getBoletim(UUID.fromString(alunoId), anoLetivo);
 	}
 
-	@CrossOrigin(origins = "#{systemEnvironment['NODE_URL']}")
 	@PostMapping("/nota")
+	@CrossOrigin(origins = "#{systemEnvironment['NODE_URL']}")
+	@ApiOperation(value = "Salva uma nota por aluno, por matéria e por ano letivo")
 	public String save(@Valid @RequestBody NotaDTO nota, Errors errors) {
 		if (errors.hasErrors()) {
 			throw new ExceptionDefault(errors.getFieldError().getDefaultMessage());
@@ -54,8 +58,9 @@ public class BoletimController {
 		return boletimService.salvarNota(nota);
 	}
 
-	@CrossOrigin(origins = "#{systemEnvironment['NODE_URL']}")
 	@PostMapping("/frequencia")
+	@CrossOrigin(origins = "#{systemEnvironment['NODE_URL']}")
+	@ApiOperation(value = "Salva uma frequência por aluno, por matéria e por ano letivo")
 	public String save(@Valid @RequestBody FrequenciaDTO frequencia, Errors errors) {
 		if (errors.hasErrors()) {
 			throw new ExceptionDefault(errors.getFieldError().getDefaultMessage());
