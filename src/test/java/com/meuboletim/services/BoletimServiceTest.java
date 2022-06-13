@@ -68,6 +68,11 @@ public class BoletimServiceTest {
 	}
 
 	@Test
+	void ruim() {
+		Assertions.assertTrue(false);
+	}
+
+	@Test
 	void verificaNotaSalvaQdoEncontraUmaNota() {
 		Mockito.when(notaRepository.findFirstByAlunoIdAndMateriaIdAndAnoLetivo(alunoId, materiaId1, anoLetivo))
 				.thenReturn(Optional.of(novaNota));
