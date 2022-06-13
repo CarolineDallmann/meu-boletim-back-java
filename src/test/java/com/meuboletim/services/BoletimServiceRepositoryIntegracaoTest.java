@@ -17,7 +17,7 @@ import com.meuboletim.repositories.NotaRepository;
 
 @SpringBootTest
 @TestMethodOrder(OrderAnnotation.class)
-public class BoletimServiceRepositoryTestIntegracao {
+public class BoletimServiceRepositoryIntegracaoTest {
 
 	private static UUID alunoId = UUID.randomUUID();
 	private static short anoLetivo = (short) 2022;

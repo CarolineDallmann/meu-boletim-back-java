@@ -21,7 +21,7 @@ import com.meuboletim.services.BoletimService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BoletimControllerServiceTestIntegracao {
+public class BoletimControllerServiceIntegracaoTest {
 
 	private static UUID alunoId = UUID.randomUUID();
 	private static short anoLetivo = (short) 2022;
