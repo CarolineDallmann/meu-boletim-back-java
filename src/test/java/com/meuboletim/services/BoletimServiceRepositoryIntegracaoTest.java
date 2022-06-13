@@ -10,8 +10,8 @@ import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.meuboletim.DTO.FrequenciaDTO;
-import com.meuboletim.DTO.NotaDTO;
+import com.meuboletim.dto.FrequenciaDTO;
+import com.meuboletim.dto.NotaDTO;
 import com.meuboletim.repositories.FrequenciaRepository;
 import com.meuboletim.repositories.NotaRepository;
 

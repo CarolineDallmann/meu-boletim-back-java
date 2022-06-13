@@ -19,8 +19,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.meuboletim.DTO.FrequenciaDTO;
-import com.meuboletim.DTO.NotaDTO;
+import com.meuboletim.dto.FrequenciaDTO;
+import com.meuboletim.dto.NotaDTO;
 import com.meuboletim.services.BoletimService;
 
 @SpringBootTest

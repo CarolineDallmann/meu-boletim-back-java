@@ -1,4 +1,4 @@
-package com.meuboletim.DTO;
+package com.meuboletim.dto;
 
 import java.util.UUID;
 

@@ -16,9 +16,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.meuboletim.DTO.BoletimDTO;
-import com.meuboletim.DTO.FrequenciaDTO;
-import com.meuboletim.DTO.NotaDTO;
+import com.meuboletim.dto.BoletimDTO;
+import com.meuboletim.dto.FrequenciaDTO;
+import com.meuboletim.dto.NotaDTO;
 import com.meuboletim.entities.Frequencia;
 import com.meuboletim.entities.Nota;
 import com.meuboletim.repositories.FrequenciaRepository;

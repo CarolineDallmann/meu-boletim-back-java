@@ -1,12 +1,14 @@
 package com.meuboletim.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.meuboletim.DTO.BoletimDTO;
-import com.meuboletim.DTO.FrequenciaDTO;
-import com.meuboletim.DTO.NotaDTO;
+import com.meuboletim.dto.BoletimDTO;
+import com.meuboletim.dto.FrequenciaDTO;
+import com.meuboletim.dto.NotaDTO;
 import com.meuboletim.exceptions.ExceptionDefault;
 import com.meuboletim.services.BoletimService;
 
@@ -52,7 +54,8 @@ public class BoletimController {
 	@ApiOperation(value = "Salva uma nota por aluno, por matéria e por ano letivo")
 	public String save(@Valid @RequestBody NotaDTO nota, Errors errors) {
 		if (errors.hasErrors()) {
-			throw new ExceptionDefault(errors.getFieldError().getDefaultMessage());
+			throw new ExceptionDefault(
+					Optional.of(errors.getFieldError()).map(FieldError::getDefaultMessage).orElse(""));
 		}
 
 		return boletimService.salvarNota(nota);
@@ -63,7 +66,8 @@ public class BoletimController {
 	@ApiOperation(value = "Salva uma frequência por aluno, por matéria e por ano letivo")
 	public String save(@Valid @RequestBody FrequenciaDTO frequencia, Errors errors) {
 		if (errors.hasErrors()) {
-			throw new ExceptionDefault(errors.getFieldError().getDefaultMessage());
+			throw new ExceptionDefault(
+					Optional.of(errors.getFieldError()).map(FieldError::getDefaultMessage).orElse(""));
 		}
 		return boletimService.salvarFrequencia(frequencia);
 	}
