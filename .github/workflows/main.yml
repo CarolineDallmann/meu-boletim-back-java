@@ -31,15 +31,17 @@ jobs:
       - name: Quality Gate
         run: |
             qualityGateStatus="$(curl --silent --fail --show-error "https://sonarcloud.io/api/qualitygates/project_status?projectKey=back-java" | jq -r '.projectStatus.status')"
-            echo qualityGateStatus
+            echo ${qualityGateStatus}
             if [[ ${qualityGateStatus} == "OK" ]];then
-              success "Quality Gate has PASSED."
+              echo "Quality Gate has PASSED."
             elif [[ ${qualityGateStatus} == "WARN" ]];then
-              warn "Warnings on Quality Gate."
+              echo "Warnings on Quality Gate."
             elif [[ ${qualityGateStatus} == "ERROR" ]];then
-              fail "Quality Gate has FAILED."
+              echo "Quality Gate has FAILED."
+              exit 1
             else
-              fail "Quality Gate not set for the project. Please configure the Quality Gate in SonarQube or remove sonarqube-quality-gate action from the workflow."
+              echo "Quality Gate not set for the project. Please configure the Quality Gate in SonarQube or remove sonarqube-quality-gate action from the workflow."
+              exit 1
             fi
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
