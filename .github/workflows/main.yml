@@ -27,8 +27,20 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar sonar-break:sonar-break -Dsonar.projectKey=back-java
-   
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=back-java
+      - name: Quality Gate
+        run: |
+            qualityGateStatus="$(curl --silent --fail --show-error "https://sonarcloud.io/api/qualitygates/project_status?projectKey=back-java" | jq -r '.projectStatus.status')"
+            echo qualityGateStatus
+            if [[ ${qualityGateStatus} == "OK" ]];then
+              success "Quality Gate has PASSED."
+            elif [[ ${qualityGateStatus} == "WARN" ]];then
+              warn "Warnings on Quality Gate."
+            elif [[ ${qualityGateStatus} == "ERROR" ]];then
+              fail "Quality Gate has FAILED."
+            else
+              fail "Quality Gate not set for the project. Please configure the Quality Gate in SonarQube or remove sonarqube-quality-gate action from the workflow."
+            fi
       - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
