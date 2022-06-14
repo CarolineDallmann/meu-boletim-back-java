@@ -30,6 +30,7 @@ jobs:
         run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=back-java
       - name: Quality Gate
         run: |
+            sleep 10s
             qualityGateStatus="$(curl --silent --fail --show-error "https://sonarcloud.io/api/qualitygates/project_status?projectKey=back-java" | jq -r '.projectStatus.status')"
             if [[ ${qualityGateStatus} == "OK" ]];then
               echo "Quality Gate has PASSED."
