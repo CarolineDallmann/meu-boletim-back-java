@@ -89,6 +89,11 @@
 		    <artifactId>jacoco-maven-plugin</artifactId>
 		    <version>0.8.6</version>
 		</dependency>
+		<dependency>
+			<groupId>com.github.sgoertzen</groupId>
+			<artifactId>sonarbreak</artifactId>
+			<version>1.2.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -139,14 +144,15 @@
 			                <goal>report</goal>
 			            </goals>
 			        </execution>
-			        <execution>
-						<id>report</id>
-						<phase>test</phase>
-						<goals>
-							<goal>report</goal>
-						</goals>
-					</execution>
 			    </executions>
+			</plugin>
+			<plugin>
+				<groupId>com.github.sgoertzen</groupId>
+				<artifactId>sonarbreak</artifactId>
+				<version>1.2.2</version>
+				<configuration>
+					<sonarServer>${sonar.host.url}</sonarServer>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
