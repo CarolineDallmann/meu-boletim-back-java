@@ -25,7 +25,7 @@ import com.meuboletim.services.BoletimService;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class BoletimControllerTest {
+class BoletimControllerTest {
 
 	private UUID alunoId;
 	private short anoLetivo;
@@ -68,7 +68,7 @@ public class BoletimControllerTest {
 				.perform(get("/boletim?anoLetivo={anoLetivo}", anoLetivo).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
 
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Informe o aluno");
+		Assertions.assertEquals("Informe o aluno", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).getBoletim(alunoId, anoLetivo);
 	}
 
@@ -77,7 +77,7 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc
 				.perform(get("/boletim?alunoId={alunoId}", alunoId).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Informe o ano");
+		Assertions.assertEquals("Informe o ano", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).getBoletim(alunoId, anoLetivo);
 	}
 
@@ -98,7 +98,7 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/nota").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Matéria obrigatória");
+		Assertions.assertEquals("Matéria obrigatória", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto);
 	}
 
@@ -109,7 +109,7 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/nota").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Aluno obrigatório");
+		Assertions.assertEquals("Aluno obrigatório", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto);
 	}
 
@@ -120,7 +120,7 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/nota").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Ano obrigatório");
+		Assertions.assertEquals("Ano obrigatório", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto);
 	}
 
@@ -138,10 +138,10 @@ public class BoletimControllerTest {
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result2.andExpect(status().isBadRequest());
 
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
-		Assertions.assertEquals(result2.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser acima de dez");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
+		Assertions.assertEquals("Valor não pode ser acima de dez",
+				result2.andReturn().getResolvedException().getMessage());
 
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto);
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto2);
@@ -161,10 +161,10 @@ public class BoletimControllerTest {
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result2.andExpect(status().isBadRequest());
 
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
-		Assertions.assertEquals(result2.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser acima de dez");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
+		Assertions.assertEquals("Valor não pode ser acima de dez",
+				result2.andReturn().getResolvedException().getMessage());
 
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto);
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto2);
@@ -184,10 +184,10 @@ public class BoletimControllerTest {
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result2.andExpect(status().isBadRequest());
 
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
-		Assertions.assertEquals(result2.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser acima de dez");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
+		Assertions.assertEquals("Valor não pode ser acima de dez",
+				result2.andReturn().getResolvedException().getMessage());
 
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto);
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto2);
@@ -207,10 +207,10 @@ public class BoletimControllerTest {
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result2.andExpect(status().isBadRequest());
 
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
-		Assertions.assertEquals(result2.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser acima de dez");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
+		Assertions.assertEquals("Valor não pode ser acima de dez",
+				result2.andReturn().getResolvedException().getMessage());
 
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto);
 		Mockito.verify(service, Mockito.times(0)).salvarNota(novaNotaDto2);
@@ -233,7 +233,7 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Aluno obrigatório");
+		Assertions.assertEquals("Aluno obrigatório", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 
@@ -244,7 +244,7 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Matéria obrigatória");
+		Assertions.assertEquals("Matéria obrigatória", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 
@@ -255,7 +255,7 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(), "Ano obrigatório");
+		Assertions.assertEquals("Ano obrigatório", result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 
@@ -266,8 +266,8 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 
@@ -278,8 +278,8 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 
@@ -290,8 +290,8 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 
@@ -302,8 +302,8 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 
@@ -314,8 +314,8 @@ public class BoletimControllerTest {
 		ResultActions result = mockMvc.perform(post("/boletim/frequencia").content(jsonBody)
 				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		result.andExpect(status().isBadRequest());
-		Assertions.assertEquals(result.andReturn().getResolvedException().getMessage(),
-				"Valor não pode ser abaixo de zero");
+		Assertions.assertEquals("Valor não pode ser abaixo de zero",
+				result.andReturn().getResolvedException().getMessage());
 		Mockito.verify(service, Mockito.times(0)).salvarFrequencia(novaFreqDto);
 	}
 

@@ -25,7 +25,7 @@ import com.meuboletim.repositories.FrequenciaRepository;
 import com.meuboletim.repositories.NotaRepository;
 
 @ExtendWith(SpringExtension.class)
-public class BoletimServiceTest {
+class BoletimServiceTest {
 
 	private UUID alunoId;
 	private short anoLetivo;
