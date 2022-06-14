@@ -55,7 +55,8 @@ public class BoletimController {
 	public String save(@Valid @RequestBody NotaDTO nota, Errors errors) {
 		if (errors.hasErrors()) {
 			throw new ExceptionDefault(
-					Optional.of(errors.getFieldError()).map(FieldError::getDefaultMessage).orElse(""));
+					// Optional.of(errors.getFieldError()).map(FieldError::getDefaultMessage).orElse(""));
+					errors.getFieldError().getDefaultMessage());
 		}
 
 		return boletimService.salvarNota(nota);
