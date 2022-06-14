@@ -25,6 +25,7 @@ public class BoletimService {
 	FrequenciaRepository frequenciaRepository;
 
 	public List<BoletimDTO> getBoletim(UUID alunoId, short anoLetivo) {
+		String batata = "";
 		List<Nota> notas = notaRepository.findByAlunoIdAndAnoLetivo(alunoId, anoLetivo);
 		List<Frequencia> frequencias = frequenciaRepository.findByAlunoIdAndAnoLetivo(alunoId, anoLetivo);
 		List<BoletimDTO> boletim = new ArrayList<>();

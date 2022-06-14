@@ -31,7 +31,6 @@ jobs:
       - name: Quality Gate
         run: |
             qualityGateStatus="$(curl --silent --fail --show-error "https://sonarcloud.io/api/qualitygates/project_status?projectKey=back-java" | jq -r '.projectStatus.status')"
-            echo ${qualityGateStatus}
             if [[ ${qualityGateStatus} == "OK" ]];then
               echo "Quality Gate has PASSED."
             elif [[ ${qualityGateStatus} == "WARN" ]];then
